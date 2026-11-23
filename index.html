@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English-Voc</title>
+<meta name="description" content="Vokabeltrainer für Englisch C1 und C2">
+<meta name="theme-color" content="#3c3b6e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="English-Voc">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script>
+// Theme vor dem ersten Rendern setzen (kein Aufblitzen)
+try {
+  var s = JSON.parse(localStorage.getItem('english-voc-v1') || '{}');
+  var t = s.settings && s.settings.theme;
+  if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  document.documentElement.dataset.theme = t;
+} catch (e) {}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">English-Voc<small>C1 · C2</small></div>
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Sprache der Kartenvorderseite">
+      <button id="lang-en" type="button" aria-label="Englisch zuerst" title="Englisch zuerst"></button>
+      <button id="lang-de" type="button" aria-label="Deutsch zuerst" title="Deutsch zuerst"></button>
+    </div>
+    <button id="theme" class="icon-btn" type="button" aria-label="Hell/Dunkel umschalten"></button>
+  </div>
+</header>
+<main id="app" aria-live="polite"></main>
+<nav id="nav" class="tabs">
+  <button data-view="home" type="button"><span class="ti" data-i="home"></span>Start</button>
+  <button data-view="kasten" type="button"><span class="ti" data-i="box"></span>Nicht gewusst<b id="kbadge" hidden></b></button>
+  <button data-view="more" type="button"><span class="ti" data-i="cog"></span>Mehr</button>
+</nav>
+<div id="toast" role="status"></div>
+<noscript>English-Voc benötigt JavaScript.</noscript>
+<script src="app.js"></script>
+</body>
+</html>
